@@ -1,0 +1,27 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: rerun-job-chain-fail
+on:
+  workflow_dispatch:
+jobs:
+  job-a:
+    steps:
+      - name: Run job-a
+        uses: docker://alpine:3.20
+        shell: sh
+        run: |
+          echo "job-a failing" && exit 1
+  job-b:
+    needs: job-a
+    steps:
+      - name: Run job-b
+        uses: docker://alpine:3.20
+        shell: sh
+        run: echo "job-b running"
+  job-c:
+    needs: job-b
+    steps:
+      - name: Run job-c
+        uses: docker://alpine:3.20
+        shell: sh
+        run: echo "job-c running"
