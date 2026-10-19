@@ -1,0 +1,8 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: error-job-broken
+on:
+  workflow_dispatch:
+jobs:
+  call:
+    uses: cloudbees-io/does-not-exist-repo/.cloudbees/workflows/missing.yaml@v1
