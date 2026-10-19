@@ -17,7 +17,8 @@ jobs:
       - name: Run job-b
         uses: docker://alpine:3.20
         shell: sh
-        run: echo "job-b running"
+        run: |
+          echo "job-b running"
   job-c:
     needs: job-b
     steps:
